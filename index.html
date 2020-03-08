@@ -49,6 +49,7 @@
                 return function(text, norm) {
                 var x;
                 for(x = 0; x < r.length; x++) {
+                    text = text.replace(/\s+/g, '  ')
                     text = text.split(norm ? b[x] : r[x]).join(norm ? r[x] : b[x]);
                     text = text.split(norm ? b[x].toUpperCase() : r[x].toUpperCase()).join(norm ? r[x].toUpperCase() : b[x].toUpperCase());
                 }
