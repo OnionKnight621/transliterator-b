@@ -16,8 +16,8 @@
 
 <body>
     <div class="container">
-        <div class="card">
-            <h1 align=center >na</h1>
+        <div class="card p-5">
+            <h1 align=center >Rus to b</h1>
             <br>
 
             <input type="text" id="input-b" placeholder="Enter smth">
@@ -42,10 +42,11 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script>
-        function transliterator(input, dictionary) {
-            const r = 'а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я'.split(/ +/g);
-            const b = ''.split(/ +/g);
-            return function(text, norm) {
+        transliterate = (
+            function() {
+                const r = 'а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я'.split(/ +/g);
+                const b = '升 五 乃 广 亼 仨 庄 米 弓 仈 认 长 入 从 廾 口 刀 尸 匚 丅 丫 中 乂 凵 丩 山 山 b 辷 b 彐 扣 兄'.split(/ +/g);
+                return function(text, norm) {
                 var x;
                 for(x = 0; x < r.length; x++) {
                     text = text.split(norm ? b[x] : r[x]).join(norm ? r[x] : b[x]);
@@ -53,10 +54,17 @@
                 }
                 return text;
             }
-        }norm
+            }
+        )();
         $('#transliterator-btn').click(function() {
             let input = $('#input-b').val();
-            $('#output-b').val(input);~
+            /* Select the text field */
+            // input.select();
+            // input.setSelectionRange(0, 99999); /*For mobile devices*/
+
+            /* Copy the text inside the text field */
+            // document.execCommand("copy");
+            $('#output-b').val(transliterate(input));
         })
     </script>
 </body>
