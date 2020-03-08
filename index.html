@@ -17,7 +17,7 @@
 <body>
     <div class="container">
         <div class="card p-5">
-            <h1 align=center >Rus to b</h1>
+            <h1 align=center >R to b</h1>
             <br>
 
             <input type="text" id="input-b" placeholder="Enter smth">
@@ -59,13 +59,19 @@
         )();
         $('#transliterator-btn').click(function() {
             let input = $('#input-b').val();
-            /* Select the text field */
-            // input.select();
-            // input.setSelectionRange(0, 99999); /*For mobile devices*/
 
             /* Copy the text inside the text field */
             // document.execCommand("copy");
             $('#output-b').val(transliterate(input));
+        })
+        $(document).keypress(function(e) {
+            if (e.which == 13) {
+                let input = $('#input-b').val();
+
+                /* Copy the text inside the text field */
+                // document.execCommand("copy");
+                $('#output-b').val(transliterate(input));
+            }
         })
     </script>
 </body>
