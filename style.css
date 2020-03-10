@@ -1,0 +1,9 @@
+.language {
+    border: solid black 2px;
+    border-radius: 8px;
+}
+
+.language:hover {
+    border: solid blue 2px;
+    color: blue;
+}

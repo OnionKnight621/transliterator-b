@@ -16,17 +16,15 @@
 
 <body>
     <div class="container">
-        <div class="card p-5">
-            <h1 align=center >R to b</h1>
+        <div class="card p-5 mt-3">
+            <h1 align=center ><span class="language">Rus</span> to B</h1>
             <br>
 
             <input type="text" id="input-b" placeholder="Enter smth">
             <br>
             <button type="button" class="btn btn-secondary" id='transliterator-btn'>Transliterate</button>
             <br>
-            <textarea id="output-b" disabled>
-                Output
-            </textarea>
+            <textarea id="output-b" disabled>Output</textarea>
         </div>
     </div>
 
@@ -42,38 +40,70 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script>
+        let state = { language: 'rus' };
+
+        $('.language').click(function() {
+            let langVal = $('.language').text();
+            if (langVal === 'Rus') {
+                $('.language').text('Eng');
+                state.language = 'eng';
+
+            }
+            if (langVal === 'Eng') {
+                $('.language').text('Rus');
+                state.language = 'rus';
+            }
+            $('input-b').val('');
+            $('output-b').val('');
+        });
+
         transliterate = (
             function() {
-                const r = 'а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я'.split(/ +/g);
-                const b = '升 五 乃 广 亼 仨 庄 米 弓 仈 认 长 入 从 廾 口 刀 尸 匚 丅 丫 中 乂 凵 丩 山 山 b 辷 b 彐 扣 兄'.split(/ +/g);
-                return function(text, norm) {
-                var x;
-                for(x = 0; x < r.length; x++) {
-                    text = text.replace(/\s+/g, '  ')
-                    text = text.split(norm ? b[x] : r[x]).join(norm ? r[x] : b[x]);
-                    text = text.split(norm ? b[x].toUpperCase() : r[x].toUpperCase()).join(norm ? r[x].toUpperCase() : b[x].toUpperCase());
+                const rus = 'а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я'.split(/ +/g);
+                const rusB = '升 五 乃 广 亼 仨 庄 米 乡 计 认 长 入 从 廾 口 刀 尸 匚 丅 丫 中 乂 凵 丩 山 山 b 仈 b 彐 扣 兄'.split(/ +/g);
+                const eng = 'a b c d e f g h i j k l m n o p q r s t u v w x y z'.split(/ +/g);
+                const engB = '升 乃 匚 力 仨 下 马 卄 工 亅 长 乚 从 认 口 尸 贝 尺 丂 丅 凵 V 山 乂 丫 乙'.split(/ +/g);
+
+                return function(text, lang) {
+                    let fromLang;
+                    let toLang;
+                    if (lang === 'eng') {
+                        fromLang = eng;
+                        toLang = engB;
+                    } else {
+                        fromLang = rus;
+                        toLang = rusB;
+                    };
+
+                    let x;
+                    for(x = 0; x < fromLang.length; x++) {
+                        text = text.replace(/\s+/g, '  ');
+                        text = text.split(fromLang[x]).join(toLang[x]);
+                        text = text.split(fromLang[x].toUpperCase()).join(toLang[x].toUpperCase());
+                    }
+                    return text;
                 }
-                return text;
-            }
             }
         )();
+
         $('#transliterator-btn').click(function() {
             let input = $('#input-b').val();
 
             /* Copy the text inside the text field */
             // document.execCommand("copy");
-            $('#output-b').val(transliterate(input));
-        })
+            $('#output-b').val(transliterate(input, state.language));
+        });
         $(document).keypress(function(e) {
             if (e.which == 13) {
                 let input = $('#input-b').val();
 
                 /* Copy the text inside the text field */
                 // document.execCommand("copy");
-                $('#output-b').val(transliterate(input));
+                $('#output-b').val(transliterate(input, state.language));
             }
-        })
+        });
     </script>
+    <!-- https://polusharie.com/index.php?topic=118753.0 -->
 </body>
 
 </html>
