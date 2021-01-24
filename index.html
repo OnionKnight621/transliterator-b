@@ -17,14 +17,14 @@
 <body>
     <div class="container">
         <div class="card p-5 mt-3">
-            <h1 align=center ><span class="language">Rus</span> to B</h1>
+            <h1 align=center ><span class="language">Ru</span> to B</h1>
             <br>
 
-            <input type="text" id="input-b" placeholder="Enter smth">
+            <textarea type="text" id="input-b" placeholder="Enter smth" rows="4"></textarea>
             <br>
             <button type="button" class="btn btn-secondary" id='transliterator-btn'>Transliterate</button>
             <br>
-            <textarea id="output-b" disabled>Output</textarea>
+            <textarea id="output-b" placeholder="Output" rows="4" disabled></textarea>
         </div>
     </div>
 
@@ -40,18 +40,18 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <script>
-        let state = { language: 'rus' };
+        let state = { language: 'ru' };
 
         $('.language').click(function() {
             let langVal = $('.language').text();
-            if (langVal === 'Rus') {
-                $('.language').text('Eng');
-                state.language = 'eng';
+            if (langVal === 'Ru') {
+                $('.language').text('En');
+                state.language = 'en';
 
             }
-            if (langVal === 'Eng') {
-                $('.language').text('Rus');
-                state.language = 'rus';
+            if (langVal === 'En') {
+                $('.language').text('Ru');
+                state.language = 'ru';
             }
             $('input-b').val('');
             $('output-b').val('');
@@ -59,15 +59,15 @@
 
         transliterate = (
             function() {
-                const rus = 'а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я'.split(/ +/g);
-                const rusB = '升 五 乃 广 亼 仨 仨 米 乡 计 认 长 入 从 廾 口 刀 尸 匚 丅 丫 中 乂 凵 丩 山 山 ら もI も 彐 扣 兄'.split(/ +/g);
+                const rus = 'а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я і'.split(/ +/g);
+                const rusB = '升 五 乃 广 亼 仨 仨 米 乡 计 认 长 入 从 廾 口 刀 尸 匚 丅 丫 中 乂 凵 丩 山 山 ら もI も 彐 扣 兄 工'.split(/ +/g);
                 const eng = 'a b c d e f g h i j k l m n o p q r s t u v w x y z'.split(/ +/g);
                 const engB = '升 乃 匚 力 仨 下 马 卄 工 亅 长 乚 从 认 口 尸 贝 尺 丂 丅 凵 V 山 乂 丫 乙'.split(/ +/g);
 
                 return function(text, lang) {
                     let fromLang;
                     let toLang;
-                    if (lang === 'eng') {
+                    if (lang === 'en') {
                         fromLang = eng;
                         toLang = engB;
                     } else {
