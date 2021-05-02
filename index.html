@@ -86,20 +86,26 @@
             }
         )();
 
-        $('#transliterator-btn').click(function() {
+        function makeOutput() {
             let input = $('#input-b').val();
 
-            /* Copy the text inside the text field */
-            // document.execCommand("copy");
             $('#output-b').val(transliterate(input, state.language));
+
+            // copy to clipboard
+            let tmp = $("<input>");
+            $("body").append(tmp);
+            console.log($('#output-b').val(), 1123);
+            tmp.val($('#output-b').val()).select();
+            document.execCommand("copy");
+            tmp.remove();
+        }
+
+        $('#transliterator-btn').click(function() {
+            makeOutput();
         });
         $(document).keypress(function(e) {
             if (e.which == 13) {
-                let input = $('#input-b').val();
-
-                /* Copy the text inside the text field */
-                // document.execCommand("copy");
-                $('#output-b').val(transliterate(input, state.language));
+                makeOutput();
             }
         });
     </script>
